@@ -14,29 +14,60 @@ canvas {
 
 .moon {
   position: absolute;
-  width: 250px;
-  height: 250px;
+  width: 280px;
+  height: 280px;
   background: radial-gradient(circle, #fff, #ddd);
   border-radius: 50%;
-  box-shadow: 0 0 80px #a78bfa, 0 0 160px #7c3aed;
-  animation: glow 4s infinite alternate;
+  box-shadow: 
+    0 0 100px #a78bfa,
+    0 0 200px #7c3aed,
+    0 0 300px rgba(124,58,237,0.5);
+  animation: glow 5s infinite alternate;
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 60px #a78bfa; }
-  to { box-shadow: 0 0 140px #7c3aed; }
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+.glow-text {
+  background: linear-gradient(90deg,#fff,#a78bfa,#7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .card {
   background: rgba(255,255,255,0.05);
-  padding: 20px;
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,transparent,rgba(255,255,255,0.1),transparent);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 40px rgba(124,58,237,0.6);
 }
 
 .skeleton {
-  height: 120px;
-  border-radius: 16px;
+  height: 140px;
+  border-radius: 20px;
   background: linear-gradient(90deg,#111 25%,#222 50%,#111 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
