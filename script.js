@@ -3,9 +3,8 @@ function scrollToSection(id) {
 }
 
 const layers = [
-  { canvas: document.getElementById('stars'), count: 100, speed: 0.3 },
-  { canvas: document.getElementById('stars2'), count: 70, speed: 0.6 },
-  { canvas: document.getElementById('stars3'), count: 40, speed: 1 }
+  { canvas: document.getElementById('stars'), count: 120, speed: 0.3 },
+  { canvas: document.getElementById('stars2'), count: 60, speed: 0.7 }
 ];
 
 layers.forEach(layer => {
@@ -21,16 +20,20 @@ layers.forEach(layer => {
 
   function animate() {
     ctx.clearRect(0, 0, layer.canvas.width, layer.canvas.height);
+
     layer.stars.forEach(s => {
       s.y += layer.speed;
       if (s.y > layer.canvas.height) s.y = 0;
+
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = "white";
       ctx.fill();
     });
+
     requestAnimationFrame(animate);
   }
+
   animate();
 });
 
@@ -47,25 +50,28 @@ let reposData = [];
 fetch('https://api.github.com/users/lunarianbyte/repos')
   .then(res => res.json())
   .then(data => {
-    reposData = data;
+    reposData = data.sort((a,b)=>b.stargazers_count-a.stargazers_count);
     renderRepos('all');
   });
 
 function renderRepos(filter) {
   container.innerHTML = '';
+
   reposData
     .filter(r => filter === 'all' || r.language === filter)
     .slice(0, 6)
     .forEach(repo => {
       const div = document.createElement('div');
       div.className = 'card';
+
       div.innerHTML = `
-        <h3>${repo.name}</h3>
-        <p>${repo.description || ''}</p>
-        <small>${repo.language || ''}</small>
-        <br/>
-        <a href="${repo.html_url}" target="_blank">View</a>
+        <h3 class="text-xl font-bold mb-2">${repo.name}</h3>
+        <p class="text-gray-400 text-sm">${repo.description || 'No description'}</p>
+        <div class="mt-3 text-xs text-purple-300">${repo.language || ''}</div>
+        <div class="mt-1 text-xs text-gray-500">⭐ ${repo.stargazers_count}</div>
+        <a href="${repo.html_url}" target="_blank" class="block mt-4 text-sm text-indigo-400">View Project →</a>
       `;
+
       container.appendChild(div);
     });
 }
@@ -77,3 +83,23 @@ document.getElementById('filter').addEventListener('change', e => {
 document.getElementById('toggleDark').onclick = () => {
   document.body.classList.toggle('light');
 };
+
+window.addEventListener('mousemove', e => {
+  document.querySelectorAll('.card').forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    card.style.transform = `
+      perspective(600px)
+      rotateX(${(y - rect.height/2)/20}deg)
+      rotateY(${-(x - rect.width/2)/20}deg)
+    `;
+  });
+});
+
+window.addEventListener('mouseleave', () => {
+  document.querySelectorAll('.card').forEach(card => {
+    card.style.transform = 'none';
+  });
+});
