@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LunarianByte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+
+<canvas id="stars"></canvas>
+<canvas id="stars2"></canvas>
+<canvas id="stars3"></canvas>
+
+<header class="fixed w-full flex justify-between items-center px-6 py-4 bg-black/50 backdrop-blur z-50">
+  <h1 class="text-xl font-bold text-purple-300">🌙 LunarianByte</h1>
+  <div class="flex items-center gap-4">
+    <button id="toggleDark" class="px-3 py-1 bg-purple-600 rounded">🧠</button>
+    <nav class="space-x-4 text-gray-300">
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="h-screen flex items-center justify-center text-center relative">
+  <div class="moon"></div>
+  <div class="z-10">
+    <h2 class="text-5xl font-bold mb-4">LunarianByte</h2>
+    <button onclick="scrollToSection('projects')" class="mt-6 px-6 py-3 bg-purple-600 rounded-lg">Explore</button>
+  </div>
+</section>
+
+<section id="projects" class="py-20 text-center px-6">
+  <h2 class="text-3xl font-bold mb-6">Projects</h2>
+  <div class="mb-6">
+    <select id="filter" class="bg-black border border-gray-700 px-3 py-2">
+      <option value="all">All</option>
+      <option value="JavaScript">JavaScript</option>
+      <option value="Python">Python</option>
+      <option value="HTML">HTML</option>
+    </select>
+  </div>
+  <div id="repoContainer" class="grid md:grid-cols-3 gap-6"></div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
