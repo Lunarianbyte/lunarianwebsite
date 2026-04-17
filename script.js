@@ -83,23 +83,3 @@ document.getElementById('filter').addEventListener('change', e => {
 document.getElementById('toggleDark').onclick = () => {
   document.body.classList.toggle('light');
 };
-
-window.addEventListener('mousemove', e => {
-  document.querySelectorAll('.card').forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    card.style.transform = `
-      perspective(600px)
-      rotateX(${(y - rect.height/2)/20}deg)
-      rotateY(${-(x - rect.width/2)/20}deg)
-    `;
-  });
-});
-
-window.addEventListener('mouseleave', () => {
-  document.querySelectorAll('.card').forEach(card => {
-    card.style.transform = 'none';
-  });
-});
