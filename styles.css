@@ -13,22 +13,60 @@ canvas {
   pointer-events: none;
 }
 
-.moon {
-  position: absolute;
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, #fff, #ddd);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 100px #a78bfa,
-    0 0 200px #7c3aed,
-    0 0 300px rgba(124,58,237,0.5);
-  animation: glow 5s infinite alternate;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(124,58,237,0.15), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(167,139,250,0.1), transparent 50%);
+  z-index: -2;
 }
 
-@keyframes glow {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
+.moon {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #ffffff, #d1d5db 40%, #9ca3af 70%, #4b5563 100%),
+    url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+  background-blend-mode: overlay;
+  box-shadow:
+    inset -30px -30px 60px rgba(0,0,0,0.6),
+    inset 30px 30px 60px rgba(255,255,255,0.1),
+    0 0 120px rgba(167,139,250,0.9),
+    0 0 240px rgba(124,58,237,0.7),
+    0 0 360px rgba(124,58,237,0.5);
+  animation: floatMoon 6s ease-in-out infinite alternate;
+  transition: transform 0.2s ease;
+}
+
+.moon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 40%, rgba(0,0,0,0.25), transparent 70%);
+  mix-blend-mode: multiply;
+}
+
+.moon::after {
+  content: "";
+  position: absolute;
+  inset: -80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+}
+
+@keyframes floatMoon {
+  from {
+    transform: translateY(-15px) scale(1);
+  }
+  to {
+    transform: translateY(15px) scale(1.06);
+  }
 }
 
 .glow-text {
@@ -46,6 +84,7 @@ canvas {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .card::before {
@@ -55,6 +94,7 @@ canvas {
   background: linear-gradient(120deg,transparent,rgba(255,255,255,0.1),transparent);
   opacity: 0;
   transition: 0.3s;
+  pointer-events: none;
 }
 
 .card:hover::before {
@@ -66,8 +106,24 @@ canvas {
   box-shadow: 0 0 40px rgba(124,58,237,0.6);
 }
 
+.card a {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
 .skeleton {
   height: 140px;
+  border-radius: 20px;
+  background: linear-gradient(90deg,#111 25%,#222 50%,#111 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {background-position:200% 0}
+  100% {background-position:-200% 0}
+}  height: 140px;
   border-radius: 20px;
   background: linear-gradient(90deg,#111 25%,#222 50%,#111 75%);
   background-size: 200% 100%;
