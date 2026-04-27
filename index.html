@@ -1,73 +1,115 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LunarianByte</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Bootstrap Custom -->
+  <link rel="stylesheet" href="bootstrap.css" />
 </head>
-<body class="bg-black text-white overflow-x-hidden"><canvas id="stars"></canvas> <canvas id="stars2"></canvas>
 
-<header class="fixed w-full flex justify-between items-center px-6 py-4 bg-black/30 backdrop-blur-xl z-50 border-b border-white/10">
-  <h1 class="text-xl font-bold text-purple-300 tracking-wider">🌙 LunarianByte</h1>  <div class="flex items-center gap-4">
-    <button id="toggleDark" class="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 transition">🌠</button>
-    <a href="#about" class="text-gray-300 hover:text-white">About</a>
-    <a href="#projects" class="text-gray-300 hover:text-white">Projects</a>
-    <a href="#skills" class="text-gray-300 hover:text-white">Skills</a>
+<body class="transition-all duration-300">
+
+<!-- NAVBAR -->
+<header class="fixed top-0 w-full z-50 backdrop-blur bg-body border-bottom">
+  <div class="container d-flex justify-content-between align-items-center py-2">
+
+    <h1 class="h5 m-0 text-success">🌙 LunarianByte</h1>
+
+    <div class="d-flex align-items-center gap-2">
+
+      <button id="langToggle" class="btn btn-sm btn-outline-secondary">ID</button>
+      <button id="themeToggle" class="btn btn-sm btn-success">🌗</button>
+
+      <a href="#about" class="text-decoration-none text-secondary">About</a>
+      <a href="#projects" class="text-decoration-none text-secondary">Projects</a>
+      <a href="#skills" class="text-decoration-none text-secondary">Skills</a>
+
+    </div>
   </div>
-</header><section class="h-screen flex items-center justify-center text-center relative">
-  <div class="moon"></div>  <div class="z-10 space-y-6 max-w-2xl">
-    <h2 class="text-5xl md:text-7xl font-bold glow-text">LunarianByte</h2><p class="text-gray-400 leading-relaxed">
-  A modern digital identity focused on building elegant, futuristic, and high-performance web experiences.
-  Combining clean code, aesthetic design, and creative engineering under the calm of the moonlight.
-</p>
+</header>
 
-<div class="flex justify-center gap-4">
-  <button onclick="scrollToSection('projects')" class="px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-105 transition">
-    Explore Projects
-  </button>
-  <button onclick="scrollToSection('about')" class="px-8 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition">
-    Learn More
-  </button>
-</div>
+<!-- HERO -->
+<section class="min-vh-100 d-flex align-items-center justify-content-center text-center container">
+  <div class="pt-5 mt-5">
+
+    <h2 class="display-4 fw-bold" data-i18n="title">LunarianByte</h2>
+
+    <p class="text-secondary mt-3" data-i18n="desc">
+      Modern digital identity for elegant web experiences.
+    </p>
+
+    <div class="mt-4 d-flex justify-content-center gap-3">
+      <button onclick="scrollToSection('projects')" class="btn btn-success">
+        <span data-i18n="explore">Explore Projects</span>
+      </button>
+
+      <button onclick="scrollToSection('about')" class="btn btn-outline-secondary">
+        <span data-i18n="learn">Learn More</span>
+      </button>
+    </div>
 
   </div>
-</section><section id="about" class="py-24 px-6 text-center">
-  <h2 class="text-4xl font-bold mb-6">About Me</h2>
-  <p class="text-gray-400 max-w-3xl mx-auto leading-relaxed">
-    LunarianByte represents a passion for technology, creativity, and continuous learning.
-    Focused on crafting immersive digital experiences with modern tools like JavaScript, web animation, and UI design.
-    This space is where ideas evolve into real, interactive, and meaningful projects.
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-5 text-center container">
+  <h2 data-i18n="about">About Me</h2>
+  <p class="text-secondary mx-auto" style="max-width:600px" data-i18n="aboutDesc">
+    Developer focused on modern UI & backend.
   </p>
-</section><section id="skills" class="py-24 px-6 text-center">
-  <h2 class="text-4xl font-bold mb-12">Skills</h2>  <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-    <div class="card">
-      <h3 class="text-xl font-bold mb-2">Frontend</h3>
-      <p class="text-gray-400">HTML, CSS, JavaScript, Tailwind, UI/UX Design</p>
-    </div><div class="card">
-  <h3 class="text-xl font-bold mb-2">Backend</h3>
-  <p class="text-gray-400">Node.js, API Integration, Database Basics</p>
-</div>
+</section>
 
-<div class="card">
-  <h3 class="text-xl font-bold mb-2">Other</h3>
-  <p class="text-gray-400">Creative Coding, Animations, Problem Solving</p>
-</div>
+<!-- SKILLS -->
+<section id="skills" class="py-5 container text-center">
+  <h2 class="mb-4" data-i18n="skills">Skills</h2>
 
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card p-3 h-100">
+        <h5>Frontend</h5>
+        <p class="text-secondary">HTML, CSS, JS, Tailwind</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3 h-100">
+        <h5>Backend</h5>
+        <p class="text-secondary">Node.js, API</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3 h-100">
+        <h5>Other</h5>
+        <p class="text-secondary">Automation, UI Design</p>
+      </div>
+    </div>
   </div>
-</section><section id="projects" class="py-24 px-6 text-center">
-  <h2 class="text-4xl font-bold mb-12">Projects</h2>  <select id="filter" class="mb-8 bg-black/40 border border-white/20 px-3 py-2 rounded">
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-5 container text-center">
+  <h2 class="mb-4" data-i18n="projects">Projects</h2>
+
+  <select id="filter" class="form-select w-auto mx-auto mb-4">
     <option value="all">All</option>
-    <option value="JavaScript">JavaScript</option>
-    <option value="Python">Python</option>
-    <option value="HTML">HTML</option>
-  </select>  <div id="repoContainer" class="grid md:grid-cols-3 gap-8"></div>
-</section><section class="py-24 text-center px-6">
-  <h2 class="text-4xl font-bold mb-6">Vision</h2>
-  <p class="text-gray-400 max-w-2xl mx-auto">
-    Building a futuristic digital presence that blends design, performance, and creativity into one seamless experience.
-  </p>
-</section><footer class="text-center py-10 text-gray-500 border-t border-white/10">
-  © 2026 LunarianByte — Crafted with passion under the moon 🌙
-</footer><script src="script.js"></script></body>
+    <option value="js">JavaScript</option>
+    <option value="api">API</option>
+  </select>
+
+  <div id="repoContainer" class="row g-4"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-4 border-top">
+  © 2026 LunarianByte
+</footer>
+
+<script src="script.js"></script>
+</body>
 </html>
